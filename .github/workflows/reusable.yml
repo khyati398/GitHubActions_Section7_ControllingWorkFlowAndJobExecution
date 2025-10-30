@@ -7,9 +7,14 @@ on:
                 required: false
                 default: dist
                 type: string
+        secrets: #There is no default value in case of secrets
+            some-secret:
+                required: false
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        # env:
+        #     secret-variable: ${{ secrets.some-secret }}
         steps:
             - name: Download Artifact
               uses: actions/download-artifact@v4
