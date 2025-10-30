@@ -19,6 +19,7 @@ describe('MainContent', () => {
 
     const button = screen.getByRole('button');
     await userEvent.click(button);
-    expect(screen.getByTestId('help-are')).toBeInTheDocument(); //Changed 'help-area' to 'help-are'
+  //  expect(screen.getByTestId('help-are')).toBeInTheDocument(); //Changed 'help-area' to 'help-are'
+    expect(screen.getByTestId('help-area')).toBeInTheDocument(); //Changed back to 'help-area'
   });
 });

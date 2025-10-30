@@ -1,0 +1,22 @@
+name: Matrix Workflow
+on: push
+jobs:
+    build:
+        continue-on-error: true #This is to prevent workflow from skipping running of build job for other configurations if it fails for any one of the configuration. This helps us avoid default behavious of GitHub actions workflow to skip running of further steps and jobs if any of previous step or job has failed.
+        strategy:
+            matrix:
+                node-version: [12, 14, 16]
+                operating-system: [ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.operating-system }}
+        steps:
+            - name: Get Code
+              uses: actions/checkout@v4
+            - name: Install NodeJS
+              uses: actions/setup-node@v4
+              with:
+                node-version: ${{matrix.node-version }}
+            - name: Install dependencies
+              run: npm ci
+            - name: Build project
+              run: npm run build
+            
