@@ -81,6 +81,6 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     steps:
-      - name: Output Something
+      - name: Output information
         run: echo "Issue in a Job"
 
