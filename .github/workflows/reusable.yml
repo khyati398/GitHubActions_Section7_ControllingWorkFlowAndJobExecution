@@ -10,11 +10,17 @@ on:
         secrets: #There is no default value in case of secrets
             some-secret:
                 required: false
+        outputs:
+            some-return-var: 
+                description: Return value to the calling workflow.
+                value: ${{ jobs.deploy.outputs.some-outcome }}
 jobs:
     deploy:
         runs-on: ubuntu-latest
         # env:
         #     secret-variable: ${{ secrets.some-secret }}
+        outputs:
+            some-outcome: ${{ steps.generate-output.outputs.some-output }}
         steps:
             - name: Download Artifact
               uses: actions/download-artifact@v4
@@ -24,3 +30,7 @@ jobs:
               run: ls
             - name: Output information
               run: echo "Deploying and Uploading"
+            - name: Generate Output
+              id: generate-output
+              run: echo "some-output=success" >> $GITHUB_OUTPUT
+            
